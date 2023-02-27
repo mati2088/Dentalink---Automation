@@ -1,0 +1,42 @@
+import { test, Locator, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://productowner-95.qa.dentalink.cl/sessions/login');
+   
+    await page.getByRole('link', { name: ' Pacientes' }).click();
+    await page.getByText('1042').click();
+    const page1Promise = page.waitForEvent('popup');
+    await page.getByRole('link', { name: 'Ir a tratamientos ' }).click();
+    const page1 = await page1Promise;
+    await page1.getByRole('button', { name: ' Nuevo plan de tratamiento' }).click();
+    await page1.getByRole('button', { name: ' Prestación' }).click();
+    await page1.getByText('Plantillas', { exact: true }).click();
+    await page1.locator('#agregar-prestaciones-container').getByText('Mis Plantillas').click();
+    await page1.getByText('Test1').click();
+    await page1.getByRole('button', { name: ' Agregar al plan de tratamiento' }).click();
+    await page1.locator('#agregar-prestaciones-container i').nth(1).click();
+    await page1.locator('.sc-chAAoq > div > div > div > div').first().click();
+    await page1.getByRole('button', { name: 'Solicitar' }).click();
+    await page1.locator('div:nth-child(2) > .sc-jvEmr > .sc-chAAoq > div > div > div > div').first().click();
+    await page1.getByRole('button', { name: 'Solicitar' }).click();
+    await page1.locator('div:nth-child(3) > .sc-jvEmr > .sc-chAAoq > div > div > div > div').first().click();
+    await page1.getByRole('button', { name: 'Solicitar' }).click();
+    await page1.getByRole('button', { name: 'Cancelar' }).click();
+    await page1.getByRole('button', { name: ' Prestación' }).click();
+    await page1.getByText('T419 - ACCIONES DE CARÁCTER GENERAL').click();
+    await page1.getByText('Juli dental').click();
+    await page1.getByRole('button', { name: ' Cargar' }).click();
+    await page1.getByRole('banner').filter({ hasText: 'Productos de T419 - ACCIONES DE CARÁCTER GENERAL' }).locator('i').nth(1).click();
+    await page1.locator('div:nth-child(4) > .sc-jvEmr > .sc-chAAoq > div > div > div > div').first().click();
+    await page1.getByText('Seleccionar múltiples prestaciones').click();
+    await page1.getByRole('button', { name: 'Evolucionar prestaciones (1) ' }).click();
+    await page1.getByText('Realizar (100%)').click();
+    await page1.getByRole('button', { name: 'Evolucionar (100%)' }).click();
+    await page1.getByRole('button', { name: 'Finalizar' }).click();
+    await page1.getByRole('link', { name: ' Recibir pago' }).click();
+    await page1.getByRole('cell', { name: '' }).locator('i').first().click();
+    await page1.getByRole('link', { name: 'Pagar tratamiento(s) ' }).click();
+    await page1.getByRole('row', { name: 'Prestación Precio Abonado Estado Por abonar' }).getByRole('checkbox').check();
+    await page1.getByRole('button', { name: 'Ingresar transacciones' }).click();
+    await page1.getByRole('button', { name: 'Continuar' }).click();
+  });
